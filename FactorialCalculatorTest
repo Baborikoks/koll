@@ -1,0 +1,37 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
+
+public class FactorialCalculatorTest {
+
+    private final FactorialCalculator calculator = new FactorialCalculator();
+
+    @Test
+    public void testCalculateFactorialsValidInput() {
+        assertEquals(List.of(1L), calculator.calculateFactorials(1));
+        assertEquals(List.of(1L, 2L, 6L, 24L, 120L), calculator.calculateFactorials(5));
+    }
+
+    @Test
+    public void testCalculateFactorialsZeroInput() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            calculator.calculateFactorials(0);
+        });
+        assertEquals("Input must be a natural number (greater than 0).", exception.getMessage());
+    }
+
+    @Test
+    public void testCalculateFactorialsNegativeInput() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            calculator.calculateFactorials(-5);
+        });
+        assertEquals("Input must be a natural number (greater than 0).", exception.getMessage());
+    }
+
+    @Test
+    public void testCalculateFactorialsLargeInput() {
+        List<Long> result = calculator.calculateFactorials(10);
+        assertEquals(List.of(1L, 2L, 6L, 24L, 120L, 720L, 5040L, 40320L, 362880L, 3628800L), result);
+    }
+}
