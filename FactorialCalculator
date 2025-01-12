@@ -1,0 +1,31 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class FactorialCalculator {
+    
+    public List<Long> calculateFactorials(int n) {
+        if (n < 1) {
+            throw new IllegalArgumentException("Input must be a natural number (greater than 0).");
+        }
+
+        List<Long> factorials = new ArrayList<>();
+        factorials.add(1L);  // 0! = 1
+
+        for (int i = 1; i < n; i++) {
+            long nextFactorial = factorials.get(i - 1) * (i + 1);
+            factorials.add(nextFactorial);
+        }
+        return factorials;
+    }
+
+    public static void main(String[] args) {
+        FactorialCalculator calculator = new FactorialCalculator();
+        int n = 5;  // Пример входного значения
+        try {
+            List<Long> result = calculator.calculateFactorials(n);
+            System.out.println("Первые " + n + " факториалов: " + result);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
